@@ -1,13 +1,14 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {IPerson} from '../types/IPerson';
 
 @Injectable({
   providedIn: 'root',
 })
-export class Mock {
+export class PersonService {
   private baseUrl = 'http://localhost:3000';
 
-  http = inject(HttpClient)
+  http:HttpClient = inject(HttpClient)
 
   getPersons() {
     const headers = new HttpHeaders({
@@ -17,7 +18,6 @@ export class Mock {
     return this.http.get(`${this.baseUrl}/person`, { headers });
   }
 
-  // Person erstellen
   createPerson(firstName: string, lastName: string, alive: boolean = true, motherId?: number, fatherId?: number) {
     const headers = new HttpHeaders({
       'x-access-code': 'FAMILYTREE-SECRET-2026', // dein Guard-Code
@@ -28,7 +28,7 @@ export class Mock {
     if (motherId) body.motherId = motherId;
     if (fatherId) body.fatherId = fatherId;
 
-    return this.http.post(`${this.baseUrl}/person`, body, { headers });
+    return this.http.post<IPerson>(`${this.baseUrl}/person`, body, { headers });
   }
 
   getPerson(){
@@ -37,6 +37,6 @@ export class Mock {
       'Content-Type': 'application/json',
     });
 
-    return this.http.get(`${this.baseUrl}/person`, { headers });
+    return this.http.get<IPerson[]>(`${this.baseUrl}/person`, { headers });
   }
 }
