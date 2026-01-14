@@ -25,8 +25,12 @@ export class PersonService {
     });
 
     const body: any = { firstName, lastName, alive };
-    if (motherId) body.motherId = motherId;
-    if (fatherId) body.fatherId = fatherId;
+    if (motherId){
+      body.motherId = motherId;
+    }
+    if (fatherId) {
+      body.fatherId = fatherId;
+    }
 
     return this.http.post<IPerson>(`${this.baseUrl}/person`, body, { headers });
   }

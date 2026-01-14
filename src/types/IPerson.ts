@@ -5,7 +5,7 @@ export interface IPerson {
   alive: boolean;
   father?:string;
   fatherId?: number;
-  mother:string;
+  mother?:string;
   motherId?: number;
   createdAt:string;
 }

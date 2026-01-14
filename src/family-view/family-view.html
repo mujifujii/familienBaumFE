@@ -1,8 +1,8 @@
 
 <div class="container">
-@for( people of personsSignal(); track $index){
+@for( people of peopleInTheFamily(); track $index){
     <div class="row">
-      <div class="col">
+      <div class="col bg-primary">
         <mat-card class="example-card" appearance="outlined">
           <mat-card-header>
             <mat-card-title>{{people.firstName}} {{people.lastName}}</mat-card-title>
@@ -10,13 +10,6 @@
           <mat-card-content>
 
           </mat-card-content>
-          <mat-card-footer class="example-card-footer">
-            <mat-chip-set aria-label="Chihuahua traits">
-              <mat-chip>charming</mat-chip>
-              <mat-chip>graceful</mat-chip>
-              <mat-chip>sassy</mat-chip>
-            </mat-chip-set>
-          </mat-card-footer>
         </mat-card>
       </div>
     </div>

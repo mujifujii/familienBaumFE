@@ -1,8 +1,9 @@
-import {Component, inject, OnInit, signal, WritableSignal} from '@angular/core';
+import {Component, inject, OnInit, Signal, signal, WritableSignal} from '@angular/core';
 import {PersonService} from '../person-service/person-service';
 import {IPerson} from '../types/IPerson';
 import {MatCardModule} from '@angular/material/card';
 import {MatChipsModule} from '@angular/material/chips';
+import {toSignal} from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-family-view',
@@ -11,14 +12,8 @@ import {MatChipsModule} from '@angular/material/chips';
   styleUrl: './family-view.scss',
   standalone: true
 })
-export class FamilyView implements OnInit{
+export class FamilyView {
   personService = inject(PersonService);
-  personsSignal:WritableSignal<IPerson[]> = signal([])
 
-
-  ngOnInit() {
-    this.personService.getPerson().subscribe(person => {
-      this.personsSignal.set(person)
-    })
-  }
+  public peopleInTheFamily:Signal<IPerson[]> = toSignal(this.personService.getPerson(), {initialValue: []})
 }
